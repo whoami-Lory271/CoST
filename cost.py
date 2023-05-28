@@ -345,6 +345,8 @@ class CoST:
         if batch_size is None:
             batch_size = self.batch_size
         n_samples, ts_l, _ = data.shape
+        print(data.shape)
+        return
 
         org_training = self.net.training
         self.net.eval()
