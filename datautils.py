@@ -32,6 +32,7 @@ def _get_time_features(dt):
 
 def load_forecast_csv(name, univar=False):
     data = pd.read_csv(f'datasets/{name}.csv', index_col='date', parse_dates=True)
+    print(f"data.shape:{data.shape}")
     dt_embed = _get_time_features(data.index)
     n_covariate_cols = dt_embed.shape[-1]
     
@@ -65,6 +66,7 @@ def load_forecast_csv(name, univar=False):
     
     scaler = StandardScaler().fit(data[train_slice])
     data = scaler.transform(data)
+    print(f"data.shape:{data.shape}")
     if name in ('electricity') or name.startswith('M5'):
         data = np.expand_dims(data.T, -1)  # Each variable is an instance rather than a feature
     else:
