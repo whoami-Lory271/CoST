@@ -346,7 +346,6 @@ class CoST:
             batch_size = self.batch_size
         n_samples, ts_l, _ = data.shape
         print(data.shape)
-        return
 
         org_training = self.net.training
         self.net.eval()
@@ -358,6 +357,7 @@ class CoST:
             output = []
             for batch in loader:
                 x = batch[0]
+                print(f"x.shape: {x.shape}")
                 if sliding_length is not None:
                     reprs = []
                     if n_samples < batch_size:
@@ -407,6 +407,7 @@ class CoST:
                             calc_buffer_l = 0
                     
                     out = torch.cat(reprs, dim=1)
+                    print(f"out.shape:{out.shape}")
                     if encoding_window == 'full_series':
                         out = F.max_pool1d(
                             out.transpose(1, 2).contiguous(),
@@ -420,6 +421,7 @@ class CoST:
                 output.append(out)
                 
             output = torch.cat(output, dim=0)
+            print(f"output.shape:{output.shape}")
 
         self.net.train(org_training)
         return output.numpy()
