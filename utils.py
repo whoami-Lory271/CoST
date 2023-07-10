@@ -105,6 +105,8 @@ def init_dl_program(
         torch.manual_seed(seed)
         
     if isinstance(device_name, (str, int)):
+        if device_name == -1:
+            device_name = 'cpu'
         device_name = [device_name]
     
     devices = []
