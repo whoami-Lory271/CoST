@@ -335,6 +335,10 @@ class CoST:
         return rearrange(out.cpu(), 'b d -> b () d')
     
     def encode(self, data, mode, mask=None, encoding_window=None, casual=False, sliding_length=None, sliding_padding=0, batch_size=None):
+        # encoding_window = None
+        # slicing = None
+        # batch_size = 256
+        # sliding_length = 1
         if mode == 'forecasting':
             encoding_window = None
             slicing = None
