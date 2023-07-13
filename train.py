@@ -94,16 +94,16 @@ if __name__ == '__main__':
         **config
     )
 
-    # loss_log = model.fit(
-    #     train_data,
-    #     n_epochs=args.epochs,
-    #     n_iters=args.iters,
-    #     verbose=True
-    # )
-    # model.save(f'{run_dir}/model.pkl')
-    #
-    # t = time.time() - t
-    # print(f"\nTraining time: {datetime.timedelta(seconds=t)}\n")
+    loss_log = model.fit(
+        train_data,
+        n_epochs=args.epochs,
+        n_iters=args.iters,
+        verbose=True
+    )
+    model.save(f'{run_dir}/model.pkl')
+
+    t = time.time() - t
+    print(f"\nTraining time: {datetime.timedelta(seconds=t)}\n")
 
     if args.eval:
         out, eval_res = tasks.eval_forecasting(model, data, train_slice, valid_slice, test_slice, scaler, pred_lens, n_covariate_cols, args.max_train_length-1)
