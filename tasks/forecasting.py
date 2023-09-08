@@ -87,8 +87,8 @@ def eval_forecasting(model, data, train_slice, valid_slice, test_slice, scaler, 
             'norm': cal_metrics(test_pred, test_labels),
             'raw': cal_metrics(test_pred_inv, test_labels_inv)
         }
-        mse.append(ours_result[pred_len]['MSE'])
-        mae.append(ours_result[pred_len]['MAE'])
+        mse.append(ours_result[pred_len]['norm']['MSE'])
+        mae.append(ours_result[pred_len]['norm']['MAE'])
         
     eval_res = {
         'ours': ours_result,
