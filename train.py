@@ -95,12 +95,12 @@ if __name__ == '__main__':
         **config
     )
 
-    # loss_log = model.fit(
-    #     train_data,
-    #     n_epochs=args.epochs,
-    #     n_iters=args.iters,
-    #     verbose=True
-    # )
+    loss_log = model.fit(
+        train_data,
+        n_epochs=args.epochs,
+        n_iters=args.iters,
+        verbose=True
+    )
     model.save(f'{run_dir}/model.pkl')
 
     t = time.time() - t
