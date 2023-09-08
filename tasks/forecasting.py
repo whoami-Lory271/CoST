@@ -46,6 +46,8 @@ def eval_forecasting(model, data, train_slice, valid_slice, test_slice, scaler, 
     lr_train_time = {}
     lr_infer_time = {}
     out_log = {}
+    mse = []
+    mae = []
     for pred_len in pred_lens:
         train_features, train_labels = generate_pred_samples(train_repr, train_data, pred_len, drop=padding)
         valid_features, valid_labels = generate_pred_samples(valid_repr, valid_data, pred_len)
@@ -85,6 +87,8 @@ def eval_forecasting(model, data, train_slice, valid_slice, test_slice, scaler, 
             'norm': cal_metrics(test_pred, test_labels),
             'raw': cal_metrics(test_pred_inv, test_labels_inv)
         }
+        mse.append(ours_result[pred_len]['MSE'])
+        mae.append(ours_result[pred_len]['MAE'])
         
     eval_res = {
         'ours': ours_result,
@@ -92,4 +96,4 @@ def eval_forecasting(model, data, train_slice, valid_slice, test_slice, scaler, 
         'lr_train_time': lr_train_time,
         'lr_infer_time': lr_infer_time
     }
-    return out_log, eval_res
+    return out_log, eval_res, mse, mae
